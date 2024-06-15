@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { v4 } from 'uuid';
+import { v4 } from "uuid";
 export default function TicketForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -11,8 +11,8 @@ export default function TicketForm() {
     3: "high",
   };
 
-//   const data = Object.entries(priorityLabels);
-//   console.log("data", data);
+  //   const data = Object.entries(priorityLabels);
+  //   console.log("data", data);
 
   const clearForm = () => {
     setTitle("");
@@ -23,10 +23,10 @@ export default function TicketForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
-        id: v4(),
-        title,
-        description,
-        priority
+      id: v4(),
+      title,
+      description,
+      priority,
     };
     console.log("data", data);
     clearForm();
@@ -67,7 +67,9 @@ export default function TicketForm() {
           </label>
         ))}
       </fieldset>
-      <button type="submit" className="button">Submit</button>
+      <button type="submit" className="button">
+        Submit
+      </button>
     </form>
   );
 }
