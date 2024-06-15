@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { v4 } from "uuid";
-export default function TicketForm() {
+export default function TicketForm({ dispatch }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("1");
@@ -29,6 +29,10 @@ export default function TicketForm() {
       priority,
     };
     console.log("data", data);
+    dispatch({
+      action: "ADD_TICKET",
+      payload: data,
+    });
     clearForm();
   };
 
