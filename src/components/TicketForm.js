@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 } from "uuid";
-export default function TicketForm({ dispatch }) {
+export default function TicketForm({ dispatch, editingTicket }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("1");
@@ -23,18 +23,28 @@ export default function TicketForm({ dispatch }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
-      id: v4(),
+      id: editingTicket ? editingTicket.id :v4(),
       title,
       description,
       priority,
     };
     console.log("data", data);
     dispatch({
-      action: "ADD_TICKET",
+      type: editingTicket ? "UPDATE_TICKET" :"ADD_TICKET",
       payload: data,
     });
     clearForm();
   };
+
+  useEffect(() => {
+    if(editingTicket) {
+        setTitle(editingTicket.title);
+        setDescription(editingTicket.description);
+        setPriority(editingTicket.priority);
+    } else {
+        clearForm();
+    }
+  }, [editingTicket]);
 
   return (
     <form onSubmit={handleSubmit} className="ticket-form">
